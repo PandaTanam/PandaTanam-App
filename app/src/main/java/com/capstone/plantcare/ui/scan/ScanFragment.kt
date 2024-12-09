@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.capstone.plantcare.R
 import com.capstone.plantcare.databinding.FragmentScanBinding
 import com.capstone.plantcare.ui.detail.DetailActivity
 import com.google.firebase.Firebase
@@ -95,17 +96,11 @@ class ScanFragment : Fragment() {
     ) { isSuccess ->
         if (isSuccess) {
             binding.previewImageView.setImageURI(viewModel.currentImageUri.value)
-//            showImage()
         } else {
             currentImageUri = null
         }
     }
 
-    private fun showImage() {
-        currentImageUri?.let {
-            Log.d("Image URI", "ShowImage: ")
-        }
-    }
 
     private fun setupGallery() {
         launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
@@ -143,6 +138,8 @@ class ScanFragment : Fragment() {
                         putExtra("treatment", uploadResponse.treatment)
                     }
                     startActivity(intent)
+                    currentImageUri = null
+                    binding.previewImageView.setImageResource(R.drawable.baseline_image_24)
                 } else {
                     Toast.makeText(requireContext(), "Data tidak tersedia", Toast.LENGTH_SHORT).show()
                 }
