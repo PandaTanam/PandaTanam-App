@@ -15,19 +15,32 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:indicatorColor="@color/primary"/>
 
-    <ImageView
-        android:id="@+id/previewImageView"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardImage"
         android:layout_width="0dp"
         android:layout_height="450dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_image_24" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/previewImageView"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_image_24" />
+
+    </com.google.android.material.card.MaterialCardView>
 
     <Button
         android:id="@+id/btnGallery"
@@ -40,7 +53,7 @@
         android:layout_marginStart="20dp"
         android:backgroundTint="@color/primary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/previewImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardImage" />
 
     <Button
         android:id="@+id/btnCamera"
@@ -53,7 +66,7 @@
         android:layout_marginEnd="20dp"
         android:backgroundTint="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/previewImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardImage" />
 
     <Button
         android:id="@+id/btnTomato"
@@ -67,7 +80,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/previewImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardImage" />
 
     <Button
         android:id="@+id/btnMango"
@@ -81,7 +94,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnChilli"
         app:layout_constraintStart_toEndOf="@+id/btnTomato"
-        app:layout_constraintTop_toBottomOf="@+id/previewImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardImage" />
 
     <Button
         android:id="@+id/btnChilli"
@@ -95,6 +108,6 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/previewImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

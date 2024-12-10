@@ -25,6 +25,13 @@ class ScanViewModel : ViewModel() {
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: MutableLiveData<String> get() = _errorMessage
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: MutableLiveData<Boolean> get() = _isLoading
+
+    fun setLoading(isLoading: Boolean) {
+        _isLoading.value = isLoading
+    }
+
     fun setCurrentImageUri(uri: Uri?) {
         _currentImageUri.value = uri
     }
@@ -39,10 +46,12 @@ class ScanViewModel : ViewModel() {
             val userIdBody = RequestBody.create("text/plain".toMediaType(), userId)
 
             val apiService = ApiConfig.getApiService()
+            _isLoading.postValue(true)
             val call = apiService.predictPlant(multipartBody, plantTypeBody, userIdBody)
 
             call.enqueue(object : Callback<UploadResponse> {
                 override fun onResponse(call: Call<UploadResponse>, response: Response<UploadResponse>) {
+                    _isLoading.postValue(false)
                     if (response.isSuccessful) {
                         _uploadResponse.postValue(response.body())
                     } else {
@@ -51,6 +60,7 @@ class ScanViewModel : ViewModel() {
                 }
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
+                    _isLoading.postValue(false)
                     Log.e("API Error", "onFailure: ${t.message}", t)
                     _errorMessage.postValue("Failure: ${t.message}")
                 }

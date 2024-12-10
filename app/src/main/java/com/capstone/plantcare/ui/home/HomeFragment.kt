@@ -1,13 +1,19 @@
 package com.capstone.plantcare.ui.home
 
+import android.content.Intent
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.plantcare.R
 import com.capstone.plantcare.databinding.FragmentHomeBinding
+import com.capstone.plantcare.ui.adapter.NewsAdapter
+import com.capstone.plantcare.ui.adapter.RecentAdapter
+import com.capstone.plantcare.ui.detail.DetailActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -24,6 +30,9 @@ class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels()
 
+    private lateinit var recentAdapter: RecentAdapter
+    private lateinit var newsAdapter: NewsAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +45,69 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeViewModel()
         setupFirebase()
+        setupRecyclerViewPlant()
+        setupRecyclerViewNews()
+
+        viewModel.fetchNewsData()
+    }
+
+    private fun setupRecyclerViewNews() {
+        newsAdapter = NewsAdapter()
+
+        binding.rvNews.apply {
+            adapter = newsAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    private fun setupRecyclerViewPlant() {
+       recentAdapter = RecentAdapter { historyItem ->
+           val intent = Intent(requireContext(), DetailActivity::class.java).apply {
+               putExtra("disease", historyItem.disease)
+               putExtra("plantType", historyItem.plantType)
+               putExtra("probability", historyItem.probability)
+               putExtra("imageUri", historyItem.imageUrl)
+               putExtra("treatment", historyItem.treatment)
+           }
+           startActivity(intent)
+       }
+
+        binding.rvRecent.apply {
+            adapter = recentAdapter
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.historyList.observe(viewLifecycleOwner) { historyList ->
+            if (historyList.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "History kosong", Toast.LENGTH_SHORT).show()
+            } else {
+                recentAdapter.submitList(historyList)
+            }
+        }
+
+        viewModel.newsList.observe(viewLifecycleOwner) { newsList ->
+            if (newsList.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "Tidak ada berita saat ini.", Toast.LENGTH_SHORT).show()
+            } else {
+                newsAdapter.submitList(newsList)
+            }
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        viewModel.isLoading2.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBar2.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setupFirebase() {
@@ -51,6 +122,15 @@ class HomeFragment : Fragment() {
 
         val auth = Firebase.auth
         val user = auth.currentUser
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val userId = currentUser?.uid
+
+        if (userId != null) {
+            viewModel.fetchRecentData(userId)
+        } else {
+            Toast.makeText(requireContext(), "User Belum Login", Toast.LENGTH_SHORT).show()
+        }
 
         if (user != null) {
             binding.tvUser.text = user.displayName ?: ""

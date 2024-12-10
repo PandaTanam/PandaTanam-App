@@ -1,5 +1,7 @@
 package com.capstone.plantcare.data.remote.api
 
+import com.capstone.plantcare.data.remote.response.HistoryResponseItem
+import com.capstone.plantcare.data.remote.response.NewsResponse
 import com.capstone.plantcare.data.remote.response.UploadResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -19,8 +21,11 @@ interface ApiService {
         @Part("user_id") userId: RequestBody
     ): Call<UploadResponse>
 
-    @GET("scanned_data/{user_id}")
+    @GET("scanned_data/{user_id}/")
     fun getData(
         @Path("user_id") user_id : String
-    ) : Call<UploadResponse>
+    ) :  Call<List<HistoryResponseItem>>
+
+    @GET("news/")
+    fun getNews(): Call<NewsResponse>
 }

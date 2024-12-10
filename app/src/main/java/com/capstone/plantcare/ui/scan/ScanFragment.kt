@@ -124,11 +124,13 @@ class ScanFragment : Fragment() {
         val userId = user?.uid
 
         if (currentImageUri != null && userId != null) {
+            binding.progressIndicator.visibility = View.VISIBLE
             Log.d("Selected Plant Type", "Plant Type: $plantType")
             Log.d("User ID", "User ID: $userId")
             viewModel.prepareRequest(requireContext(), currentImageUri, plantType, userId)
 
             viewModel.uploadResponse.observe(viewLifecycleOwner) { uploadResponse ->
+                binding.progressIndicator.visibility = View.GONE
                 if (uploadResponse != null) {
                     val intent = Intent(requireActivity(), DetailActivity::class.java).apply {
                         putExtra("plantType", uploadResponse.plantType)
@@ -145,6 +147,7 @@ class ScanFragment : Fragment() {
                 }
             }
             viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+                binding.progressIndicator.visibility = View.GONE
                 Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
             }
         } else {

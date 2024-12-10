@@ -1,12 +1,11 @@
 package com.capstone.plantcare.ui.detail
 
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.capstone.plantcare.R
 import com.capstone.plantcare.databinding.ActivityDetailBinding
 
@@ -37,9 +36,10 @@ class DetailActivity : AppCompatActivity() {
         binding.tvSubtitle.text = plantType ?: "Jenis tanaman tidak diketahui"
         binding.tvGuide.text = treatment ?: "Treatment tidak tersedia"
 
-
-        imageUri?.let {
-            binding.previewImageView.setImageURI(Uri.parse(it))
+        imageUri?.let { uri ->
+            Glide.with(this)
+                .load(uri)
+                .into(binding.previewImageView)
         }
     }
 

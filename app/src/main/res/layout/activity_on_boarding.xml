@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="Illustration"
-        android:src="@drawable/image_onboarding"
+        android:src="@drawable/vector_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
