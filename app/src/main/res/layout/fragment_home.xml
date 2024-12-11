@@ -47,6 +47,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
+
+
+    <TextView
+        android:id="@+id/tvRecentPlant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Recent Plant"
+        android:textSize="20sp"
+        android:layout_marginTop="160dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRecent"
+        android:layout_width="match_parent"
+        android:layout_height="206dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecentPlant"
+        tools:listitem="@layout/card_recent_plant"
+        android:orientation="horizontal"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/rvRecent"
+        app:layout_constraintBottom_toBottomOf="@+id/rvRecent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/tvTimeline"
         android:layout_width="wrap_content"
@@ -54,15 +90,15 @@
         android:fontFamily="@font/poppins_semibold"
         android:text="Timeline"
         android:textSize="20sp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/rvRecent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNews"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="260dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         tools:listitem="@layout/card_news"
@@ -77,41 +113,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rvNews" />
-
-    <TextView
-        android:id="@+id/tvRecentPlant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Recent Plant"
-        android:textSize="20sp"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvNews"
-        />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRecent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/tvRecentPlant"
-        tools:listitem="@layout/card_recent_plant"
-        android:orientation="horizontal"/>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/rvRecent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
