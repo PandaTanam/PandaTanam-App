@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
-            android:text="Selamat"
+            android:text="@string/selamat"
             android:textColor="@color/primary"
             android:textSize="36sp" />
 
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
-            android:text="datang!"
+            android:text="@string/datang"
             android:textColor="@color/black"
             android:textSize="36sp" />
 
@@ -42,7 +42,7 @@
         android:layout_width="299dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor"
+        android:text="@string/deskripsi_pembuka"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
         android:id="@+id/imgIllustration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Illustration"
+        android:contentDescription="@string/ilustrasi_selamat_datang"
         android:src="@drawable/image_signin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="left"
-        android:text="Sign Up With"
+        android:text="@string/sign_up"
         android:textColor="@color/gray"
         android:textSize="14sp"
         android:fontFamily="@font/poppins_medium"
@@ -79,7 +79,7 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/primary"
-        android:text="Continue with Google"
+        android:text="@string/sign_up_with_google"
         android:fontFamily="@font/poppins_medium"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

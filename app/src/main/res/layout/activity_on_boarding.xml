@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
-            android:text="Plant"
+            android:text="@string/plant"
             android:textColor="@color/primary"
             android:textSize="26sp" />
 
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
-            android:text=".Care"
+            android:text="@string/care"
             android:textColor="@color/black"
             android:textSize="26sp" />
     </LinearLayout>
@@ -58,7 +58,7 @@
         android:id="@+id/imgIllustration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Illustration"
+        android:contentDescription="@string/illustration_on_boarding"
         android:src="@drawable/vector_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +71,7 @@
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:backgroundTint="#629584"
-        android:text="Mulai"
+        android:text="@string/mulai"
         android:fontFamily="@font/poppins_medium"
         android:textSize="20sp"
         android:textColor="#FFFFFF"

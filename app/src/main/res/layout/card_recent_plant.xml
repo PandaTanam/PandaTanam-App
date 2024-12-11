@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
-            android:text="Name"
+            android:text="@string/nama_tanaman_card_recent_plant"
             android:textSize="16sp"
             android:layout_marginTop="10dp"
             android:layout_marginStart="8dp"
