@@ -1,5 +1,7 @@
 package com.capstone.plantcare.ui.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -17,6 +19,14 @@ class NewsAdapter : ListAdapter<NewsItem, NewsAdapter.MyViewHolder>(DIFF_CALLBAC
                 .into(binding.ivPhoto)
             binding.tvName.text = "${news.source}"
             binding.tvTitle.text = "${news.title}"
+
+            binding.root.setOnClickListener {
+                val context = binding.root.context
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse(news.link)
+                }
+                context.startActivity(intent)
+            }
         }
     }
 
