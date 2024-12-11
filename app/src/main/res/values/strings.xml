@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Plant Care</string>
     <string name="default_web_client_id">920676430522-r7fkfpmvsf90h1ot2dk0h9q5som15les.apps.googleusercontent.com</string>
+    <string name="permission">Izin Diperlukan</string>
+    <string name="permission_message">Aplikasi membutuhkan izin kamera untuk berfungsi. Harap aktifkan izin di Pengaturan.</string>
+    <string name="open_settings">Buka Pengaturan</string>
+    <string name="cancel">Batal</string>
+    <string name="permission_granted">Permintaan izin diberikan</string>
+    <string name="permission_denied">Permintaan izin ditolak</string>
 </resources>

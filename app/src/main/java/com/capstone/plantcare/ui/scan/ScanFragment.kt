@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.capstone.plantcare.R
 import com.capstone.plantcare.databinding.FragmentScanBinding
@@ -77,18 +78,38 @@ class ScanFragment : Fragment() {
     }
 
     private fun setupCamera() {
-        if (allPermissionGranted()) {
-            val uri = getImageUri(requireActivity())
-            if (uri != null) {
-                currentImageUri = uri
-                viewModel.setCurrentImageUri(uri)
-                launcherIntentCamera.launch(uri)
-            } else {
-                Toast.makeText(requireActivity(), "Failed to create image file", Toast.LENGTH_SHORT).show()
+        when {
+            allPermissionGranted() -> {
+                val uri = getImageUri(requireActivity())
+                if (uri != null) {
+                    currentImageUri = uri
+                    viewModel.setCurrentImageUri(uri)
+                    launcherIntentCamera.launch(uri)
+                } else {
+                    Toast.makeText(requireActivity(), "Failed to create image file", Toast.LENGTH_SHORT).show()
+                }
             }
-        } else {
-            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+            shouldShowRequestPermissionRationale(REQUIRED_PERMISSION) -> {
+                requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+            }
+            else -> {
+                showPermissionDeniedDialog()
+            }
         }
+    }
+
+    private fun showPermissionDeniedDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.permission)
+            .setMessage(R.string.permission_message)
+            .setPositiveButton(R.string.open_settings) { _, _ ->
+                val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val uri = Uri.fromParts("package", requireActivity().packageName, null)
+                intent.data = uri
+                startActivity(intent)
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
     }
 
     private val launcherIntentCamera = registerForActivityResult(
