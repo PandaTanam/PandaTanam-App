@@ -38,7 +38,7 @@ class HistoryViewModel : ViewModel() {
                         _errorMessage.postValue("Tidak ada data history untuk user ini.")
                     }
                 } else {
-                    _errorMessage.postValue("Gagal memuat data history")
+                    _errorMessage.postValue("Belum ada data history")
                 }
             }
 

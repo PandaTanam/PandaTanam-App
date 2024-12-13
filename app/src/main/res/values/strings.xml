@@ -49,4 +49,7 @@
     <string name="mangga">Mangga</string>
     <string name="cabai">Cabai</string>
     <string name="pelihara_tanamanmu">Pelihara Tanamanmu</string>
+    <string name="powered_by">Powered by</string>
+    <string name="team">Team</string>
+    <string name="nothing">Belum ada hasil scan</string>
 </resources>

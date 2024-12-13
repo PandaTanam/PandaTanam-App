@@ -29,8 +29,16 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private fun setup() {
         binding.btnStart.setOnClickListener {
+            val sharedPref = getSharedPreferences("onboarding", MODE_PRIVATE)
+            with(sharedPref.edit()) {
+                putBoolean("isOnboardingCompleted", true)
+                apply()
+            }
+            val isOnboardingCompleted = sharedPref.getBoolean("isOnboardingCompleted", false)
+            println("Onboarding Completed: $isOnboardingCompleted")
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

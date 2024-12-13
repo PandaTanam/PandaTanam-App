@@ -1,5 +1,6 @@
 package com.capstone.plantcare.ui.home
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +8,7 @@ import com.capstone.plantcare.data.remote.api.ApiConfig
 import com.capstone.plantcare.data.remote.response.HistoryResponseItem
 import com.capstone.plantcare.data.remote.response.NewsItem
 import com.capstone.plantcare.data.remote.response.NewsResponse
+import com.capstone.plantcare.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +29,9 @@ class HomeViewModel : ViewModel() {
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
 
+    private var _binding : FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
     fun fetchRecentData(userId: String) {
         _isLoading.value = true
         ApiConfig.getApiService().getData(userId).enqueue(object :
@@ -44,7 +49,7 @@ class HomeViewModel : ViewModel() {
                         _errorMessage.postValue("Tidak ada data history untuk user ini.")
                     }
                 } else {
-                    _errorMessage.postValue("Gagal memuat data history")
+                    _errorMessage.postValue("Belum ada data history")
                 }
             }
 

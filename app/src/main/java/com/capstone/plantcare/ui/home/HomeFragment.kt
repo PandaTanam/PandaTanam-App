@@ -84,7 +84,11 @@ class HomeFragment : Fragment() {
         viewModel.historyList.observe(viewLifecycleOwner) { historyList ->
             if (historyList.isNullOrEmpty()) {
                 Toast.makeText(requireContext(), "History kosong", Toast.LENGTH_SHORT).show()
+                binding.tvEmpty.visibility = View.VISIBLE
+                binding.rvRecent.visibility = View.GONE
             } else {
+                binding.tvEmpty.visibility = View.GONE
+                binding.rvRecent.visibility = View.VISIBLE
                 recentAdapter.submitList(historyList)
             }
         }
